@@ -1,28 +1,71 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<div id='app'>
+		<app-playoff-grid
+			:matchList="matchList"
+		/>
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppPlayoffGrid from '@/components/AppPlayoffGrid'
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
-  }
+  	AppPlayoffGrid,
+  },
+
+  data: () => ({
+  	matchList: [
+  		{
+	  		name: 'Match 3',
+	  		players: [
+		  		{
+		  			id: 1,
+		  			name: "player 1",
+		  		},
+		  		{
+		  			id: 3,
+		  			name: "player 3",
+		  		},
+	  		],
+				// children: [
+				// 	{
+				// 		name: 'Match 2',
+				// 		players: [
+				// 			{
+				// 				id: 3,
+				// 				name: "player 4",
+				// 			},
+				// 			{
+				// 				id: 4,
+				// 				name: "player 4",
+				// 			},
+				// 		],
+				// 		children: [],
+				// 	},
+				// 	{
+				// 		name: 'Match 1',
+				// 		players: [
+				// 			{
+				// 				id: 1,
+				// 				name: "player 1",
+				// 			},
+				// 			{
+				// 				id: 2,
+				// 				name: "player 2",
+				// 			},
+				// 		],
+				// 		children: [],
+				// 	}
+				// ],
+			},
+		],
+	}),
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
