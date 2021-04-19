@@ -14,17 +14,26 @@
 			class="playoff-grid"
 			@setPlayer="setPlayer"
 		/>
+
+		<app-player-list
+			class="player-list"
+			:size="validPlayoffGridSize"
+			@dragstart="dragstart"
+			@distributeRandom="distributeRandom"
+		/>
 	</div>
 </template>
 
 <script>
 import AppPlayoffGrid from '@/components/AppPlayoffGrid'
+import AppPlayerList from '@/components/AppPlayerList'
 
 export default {
   name: 'App',
 
   components: {
   	AppPlayoffGrid,
+  	AppPlayerList,
   },
 
   data: () => ({
