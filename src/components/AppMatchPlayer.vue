@@ -1,6 +1,13 @@
 <template>
-	<div class="app-match-player">
-		{{id}}. {{name}}
+	<div class="app-match-player"
+				:droppable="inFirstRound"
+				@drop.prevent="drop"
+				@dragover="dragover"
+				@dragenter="dragenter"
+	>
+		<template v-if="!(this.player.name === '' && this.player.id === '')">
+			{{player.id}}. {{player.name}}
+		</template>
 	</div>
 </template>
 
@@ -9,13 +16,35 @@ export default {
 	name: 'AppMatchPlayer',
 
 	props: {
-		id: {
-			type: Number,
-			required: true,
+		inFirstRound: {
+			type: Boolean,
+			default: false,
 		},
-		name: {
-			type: String,
-			required: true,
+
+		player: {
+			type: Object,
+			default: () => ({
+				id: '',
+				name: '',
+			}),
+		},
+	},
+
+	methods: {
+		drop(e) {
+			if (!e.dataTransfer.getData('Player')) return
+
+			const player = JSON.parse(e.dataTransfer.getData('Player'))
+			this.$emit('setPlayer', player)
+		},
+
+		dragover(e) {
+			if (this.inFirstRound)
+				e.preventDefault()
+		},
+		dragenter(e) {
+			if (this.inFirstRound)
+				e.preventDefault()
 		},
 	},
 }
@@ -24,21 +53,11 @@ export default {
 <style>
 .app-match-player {
 	position: relative;
+	box-sizing: border-box;
 
 	border: 1px solid #000;
 	padding: 5px;
-}
 
-.app-match-player:before {
-	position: absolute;
-	display: block;
-	content: '';
-
-	top: 50%;
-	left: -10px;
-	height: 1px;
-	width: 10px;
-
-	background: red;
+	height: 30px;
 }
 </style>
